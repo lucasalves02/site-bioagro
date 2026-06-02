@@ -108,7 +108,7 @@ Tipo de Cultura: ${formData.cultura}
     {
       title: "Cultivo de Milho",
       image: "/corn-field-agriculture.jpg",
-      description: "Bioestimulação e aumento da resistência ao acamamento",
+      description: "Bioestimulação e aumento da resistência",
       details:
         "A Lithotamnium presente na Linha Lithosafra atua como um condicionador bioclástico no cultivo do milho. A alta solubilidade do cálcio e magnésio marinho estimula a penetração radicular profunda e melhora a resistência estrutural do colmo, prevenindo o acamamento. Otimiza a absorção de nitrogênio e potássio para maximizar o rendimento de grãos por espiga. Aplicação recomendada: 200-300 kg/ha no plantio.",
     },
@@ -136,7 +136,7 @@ Tipo de Cultura: ${formData.cultura}
     {
       title: "Laranja",
       image: "/orange-grove-citrus-plantation.jpg",
-      description: "Espessamento da casca e rendimento de suco nos citros",
+      description: "Espessamento da casca e rendimento de suco",
       details:
         "No cultivo de citros, o magnésio e cálcio bioclásticos ativam o metabolismo enzimático da planta. A formulação exclusiva da Linha Lithosafra fornece nutrientes que fortalece a casca dos frutos, reduzindo a incidência de podridão seca (estresse fisiológico) e aumentando a taxa de sólidos solúveis e rendimento de suco. Recomendado: 150-250 kg/ha na projeção da copa durante a floração.",
     },
@@ -164,7 +164,7 @@ Tipo de Cultura: ${formData.cultura}
     {
       title: "Mamão",
       image: "/papaya-plantation-tropical-fruit.jpg",
-      description: "Prevenção de manchas fisiológicas e raízes mais ativas",
+      description: "Prevenção de manchas e raízes mais ativas",
       details:
         "No mamoeiro, o cálcio marinho do Lithothamnium presente na Linha Lithosafra evita o amolecimento precoce dos frutos e reduz manchas fisiológicas na casca. Estimula o crescimento contínuo de radículas absorventes, aumentando a eficiência no aproveitamento de água e de fertilizantes tradicionais (NPK). Recomendado: 100-200 kg/ha no plantio e frutificação.",
     },
