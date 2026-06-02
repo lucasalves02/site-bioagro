@@ -108,65 +108,65 @@ Tipo de Cultura: ${formData.cultura}
     {
       title: "Cultivo de Milho",
       image: "/corn-field-agriculture.jpg",
-      description: "Aplicação especializada para maximizar a produção",
+      description: "Bioestimulação e aumento da resistência ao acamamento",
       details:
-        "O LTSafra é ideal para o cultivo de milho, fornecendo os nutrientes essenciais durante todo o ciclo da cultura. Rico em cálcio e magnésio, promove o desenvolvimento radicular e aumenta a resistência ao acamamento. Aplicação recomendada: 200-300kg/ha no plantio.",
+        "A Linha Lithosafra atua como uma condicionadora bioclástica no cultivo do milho. A alta solubilidade do cálcio e magnésio marinho estimula a penetração radicular profunda e melhora a resistência estrutural do colmo, prevenindo o acamamento. Otimiza a absorção de nitrogênio e potássio para maximizar o rendimento de grãos por espiga. Aplicação recomendada: 200-300 kg/ha no plantio.",
     },
     {
       title: "Horticultura",
       image: "/vegetable-garden-organic-farming.jpg",
-      description: "Soluções orgânicas para hortaliças e verduras",
+      description: "Nutrição rizosférica imediata e aumento do shelf-life",
       details:
-        "Para cultivos de hortaliças, o LTSafra Orgânico oferece nutrição balanceada sem resíduos químicos. Melhora a qualidade dos frutos, aumenta o teor de vitaminas e prolonga a vida útil pós-colheita. Ideal para agricultura orgânica certificada. Aplicação recomendada: 150-300g/m² no preparo de canteiros",
+        "Nas hortaliças, o Lithothamnium age diretamente na rizosfera para neutralizar a acidez imediata do solo. A liberação equilibrada de cálcio, magnésio e mais de 70 micronutrientes melhora a consistência celular das folhas e frutos, aumentando o teor de vitaminas e prolongando a vida útil pós-colheita (shelf-life). Recomendado: 150-300g/m² no preparo de canteiros.",
     },
     {
       title: "Fruticultura",
       image: "/fruit-orchard-citrus-trees.jpg",
-      description: "Nutrição especializada para árvores frutíferas",
+      description: "Elevação do brix e prevenção de aborto floral",
       details:
-        "Em pomares e cultivos frutíferos, o LTSafra melhora a qualidade dos frutos, aumenta o brix e reduz a incidência de doenças fisiológicas. Especialmente eficaz em citros, manga, caju, entre outros.",
+        "Em pomares tropicais, a Linha Lithosafra promove o fornecimento balanceado de minerais complexados pela alga calcária. Melhora o vigor vegetativo, eleva a concentração de açúcares (grau Brix) e reduz drasticamente o abortamento de flores e frutíolos. Excelente para culturas exigentes como citros, caju, coco e manga.",
     },
     {
       title: "Pastagens",
       image: "/green-pasture-cattle-grazing.jpg",
-      description: "Recuperação e manutenção de pastagens",
+      description: "Recuperação de pastos e maior valor nutricional",
       details:
-        "Para pastagens degradadas, o LTSafra corrige a acidez do solo e fornece cálcio essencial para o crescimento das gramíneas. Melhora a palatabilidade e o valor nutricional do pasto, resultando em maior ganho de peso do gado.",
+        "A Linha Lithosafra neutraliza o alumínio tóxico em solos de pastagem e estimula a liberação de fósforo fixado. Isso aceleara o perfilhamento e a velocidade de rebrote do capim após o pastejo, elevando o teor de proteína bruta e minerais na forragem, o que otimiza o ganho de peso do rebanho.",
     },
     {
       title: "Laranja",
       image: "/orange-grove-citrus-plantation.jpg",
-      description: "Nutrição especializada para citros e laranjais",
+      description: "Espessamento da casca e rendimento de suco nos citros",
       details:
-        "No cultivo de laranja, o LTSafra fornece cálcio e magnésio essenciais para o desenvolvimento dos frutos cítricos. Melhora a espessura da casca, aumenta o teor de vitamina C e reduz a incidência de doenças fisiológicas como a podridão seca. Aplicação recomendada: 150-250kg/ha, especialmente durante a floração e formação dos frutos.",
+        "No cultivo de citros, o magnésio e cálcio bioclásticos ativam o metabolismo enzimático da planta. A Linha Lithosafra fortalece a casca dos frutos, reduzindo a incidência de podridão seca (estresse fisiológico) e aumentando a taxa de sólidos solúveis e rendimento de suco. Recomendado: 150-250 kg/ha na projeção da copa durante a floração.",
     },
     {
       title: "Tomate",
       image: "/tomato.png",
-      description: "Nutrição especializada para cultivo de tomate",
+      description: "Prevenção da podridão apical e maior firmeza",
       details:
-        "No cultivo de tomate, o LTSafra fornece cálcio essencial para prevenir a podridão apical (fundo preto) e melhorar a firmeza dos frutos. O magnésio presente favorece a fotossíntese e o desenvolvimento das plantas. Aplicação recomendada: 150-200kg/ha no plantio e 100kg/ha em cobertura durante a floração.",
+        "O suprimento constante de cálcio orgânico do Lithothamnium previne a podridão apical ('fundo preto') no tomateiro. Fortalece a parede celular, reduzindo rachaduras causadas por variações hídricas e melhorando a firmeza dos frutos para transporte. Recomendado: 150-200 kg/ha no plantio e 100 kg/ha na pré-floração.",
     },
     {
       title: "Feijão",
       image: "/bean-field-legume-cultivation.jpg",
-      description: "Nutrição balanceada para leguminosas",
+      description: "Nodulação eficiente e fixação biológica de nitrogênio",
       details:
-        "Para o cultivo de feijão, o LithoSafra melhora a nodulação das raízes e a fixação biológica de nitrogênio. O cálcio presente fortalece a parede celular das vagens, reduzindo o chochamento dos grãos. Aplicação recomendada: 100-150kg/ha no plantio, especialmente em solos ácidos.",
+        "No cultivo de feijão, o Lithothamnium melhora a porosidade e a aeração do solo, estimulando a nodulação radicular e a fixação biológica de nitrogênio (FBN). Fortalece as vagens contra o chochamento de grãos, mesmo sob condições de solos mais ácidos. Aplicação recomendada: 100-150 kg/ha no plantio.",
     },
     {
       title: "Cana-de-açúcar",
       image: "/sugarcane-plantation-agriculture.jpg",
-      description: "Nutrição para canaviais de alta produtividade",
+      description: "Aumento do ATR e maior longevidade das soqueiras",
       details:
-        "Em canaviais, o LithoSafra promove o perfilhamento e aumenta o teor de sacarose. O magnésio presente no produto é essencial para a fotossíntese, resultando em maior acúmulo de açúcares nos colmos. Ideal para plantio e soqueiras.",
+        "Na cana-de-açúcar, a Linha Lithosafra eleva o teor de sacarose (ATR) ao estimular a fotossíntese por meio do magnésio biodisponível. Garante brotações vigorosas na cana-planta e aumenta a longevidade das soqueiras nas colheitas sucessivas, otimizando a estrutura do solo nas entrelinhas. Ideal para aplicação no sulco de plantio.",
     },
     {
       title: "Mamão",
       image: "/papaya-plantation-tropical-fruit.jpg",
-      description: "Nutrição especializada para cultivo de mamão",
+      description: "Prevenção de manchas fisiológicas e raízes mais ativas",
       details:
-        "No cultivo de mamão, o LithoSafra fornece cálcio essencial para prevenir a podridão apical e melhorar a qualidade dos frutos. O magnésio presente favorece a fotossíntese e o desenvolvimento das plantas. Aplicação recomendada: 100-200kg/ha, especialmente durante a formação dos frutos.",
+        "No mamoeiro, o cálcio marinho do Lithothamnium evita o amolecimento precoce dos frutos e reduz manchas fisiológicas na casca. Estimula o crescimento contínuo de radículas absorventes, aumentando a eficiência no aproveitamento de água e de fertilizantes tradicionais (NPK). Recomendado: 100-200 kg/ha no plantio e frutificação.",
     },
   ]
 
@@ -218,11 +218,12 @@ Tipo de Cultura: ${formData.cultura}
       >
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="max-w-7xl mx-auto text-center relative z-10">
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 text-balance drop-shadow-lg">
-            LTSafra - Adubo Premium com Lithothamnium
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 text-balance drop-shadow-lg flex flex-col gap-2">
+            <span>Linha Lithosafra</span>
+            <span className="text-2xl md:text-4xl font-normal text-white/90">Adubo Premium enriquecido com Lithothamnium</span>
           </h2>
           <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto text-pretty drop-shadow-md">
-            Potencialize sua produção agrícola com o LTSafra, nosso fertilizante premium enriquecido com alga calcária.
+            Potencialize sua produção agrícola com a Linha Lithosafra, nossos fertilizantes premium enriquecidos com alga calcária.
             Soluções sustentáveis da Bioagro para o agronegócio sergipano.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -250,7 +251,7 @@ Tipo de Cultura: ${formData.cultura}
       {/* Benefits Section */}
       <section className="py-16 px-6">
         <div className="max-w-7xl mx-auto">
-          <h3 className="text-3xl font-bold text-center text-primary mb-12">Por que escolher LithoSafra?</h3>
+          <h3 className="text-3xl font-bold text-center text-primary mb-12">Por que escolher a Linha Lithosafra?</h3>
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="text-center">
               <CardHeader>
@@ -259,7 +260,7 @@ Tipo de Cultura: ${formData.cultura}
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Rico em cálcio e magnésio, o LTSafra promove desenvolvimento radicular e foliar superior.
+                  Rica em cálcio e magnésio, a Linha Lithosafra promove desenvolvimento radicular e foliar superior.
                 </p>
               </CardContent>
             </Card>
@@ -294,7 +295,7 @@ Tipo de Cultura: ${formData.cultura}
       {/* Applications Section */}
       <section id="aplicacoes" className="py-16 px-6 bg-muted/50">
         <div className="max-w-7xl mx-auto">
-          <h3 className="text-3xl font-bold text-center text-primary mb-12">Aplicações do LithoSafra</h3>
+          <h3 className="text-3xl font-bold text-center text-primary mb-12">Aplicações da Linha Lithosafra</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {applications.map((app, index) => (
               <div key={index} className="space-y-4">
@@ -341,7 +342,7 @@ Tipo de Cultura: ${formData.cultura}
       {/* Products Section */}
       <section id="produtos" className="py-16 px-6">
         <div className="max-w-7xl mx-auto">
-          <h3 className="text-3xl font-bold text-center text-primary mb-12">Linha LTSafra Premium</h3>
+          <h3 className="text-3xl font-bold text-center text-primary mb-12">Linha Lithosafra Premium</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <Card>
               <CardHeader>
@@ -481,7 +482,7 @@ Tipo de Cultura: ${formData.cultura}
             <Card>
               <CardHeader>
                 <Badge className="w-fit bg-primary">Nutrição de Elite</Badge>
-                <CardTitle>LTSafra Foliar</CardTitle>
+                <CardTitle>Lithofort</CardTitle>
                 <CardDescription>Aplicação foliar de alta absorção</CardDescription>
               </CardHeader>
               <CardContent>
@@ -494,7 +495,7 @@ Tipo de Cultura: ${formData.cultura}
                   <span className="text-2xl font-bold text-accent">A consultar</span>
                   <Button size="sm" variant="outline" asChild>
                     <a
-                      href="https://api.whatsapp.com/send/?phone=5579998278540&text=Ol%C3%A1%2C+estou+interessado+no+LithoSafra+Foliar&type=phone_number&app_absent=0"
+                      href="https://api.whatsapp.com/send/?phone=5579998278540&text=Ol%C3%A1%2C+estou+interessado+no+Lithofort&type=phone_number&app_absent=0"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -521,7 +522,7 @@ Tipo de Cultura: ${formData.cultura}
                   ))}
                 </div>
                 <p className="text-muted-foreground mb-4">
-                  "Desde que comecei a usar o LithoSafra, minha produção de milho aumentou. A Bioagro tem produtos de
+                  "Desde que comecei a usar a Linha Lithosafra, minha produção de milho aumentou. A Bioagro tem produtos de
                   qualidade excepcional!"
                 </p>
                 <div className="font-semibold">João Silva</div>
@@ -537,7 +538,7 @@ Tipo de Cultura: ${formData.cultura}
                   ))}
                 </div>
                 <p className="text-muted-foreground mb-4">
-                  "O LithoSafra é incrível! Minhas plantas ficaram mais resistentes, os frutos ficaram maiores e a
+                  "A Linha Lithosafra é incrível! Minhas plantas ficaram mais resistentes, os frutos ficaram maiores e a
                   colheita foi excepcional. Recomendo a Bioagro."
                 </p>
                 <div className="font-semibold">Maria Santos</div>
@@ -617,10 +618,10 @@ Tipo de Cultura: ${formData.cultura}
 
             <AccordionItem value="faq-2" className="border-b border-border py-2">
               <AccordionTrigger className="text-base font-semibold text-primary hover:text-accent hover:no-underline transition-colors">
-                Qual a diferença entre a linha LTSafra e os adubos comuns do mercado?
+                Qual a diferença entre a Linha Lithosafra e os adubos comuns do mercado?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground text-sm mt-2 leading-relaxed">
-                Os adubos comuns fornecem apenas os macro nutrientes (NPK) sintéticos. A linha LTSafra combina a adubação NPK de alta performance com a biotecnologia do Lithothamnium. Isso garante nutrição imediata e de liberação gradual, além de condicionar o solo a longo prazo.
+                Os adubos comuns fornecem apenas os macro nutrientes (NPK) sintéticos. A Linha Lithosafra combina a adubação NPK de alta performance com a biotecnologia do Lithothamnium. Isso garante nutrição imediata e de liberação gradual, além de condicionar o solo a longo prazo.
               </AccordionContent>
             </AccordionItem>
 
@@ -647,7 +648,7 @@ Tipo de Cultura: ${formData.cultura}
                 A Bioagro realiza análise de solo?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground text-sm mt-2 leading-relaxed">
-                Nós orientamos nossos clientes na interpretação das análises de solo para indicar a recomendação exata da linha LTSafra para sua cultura. Recomendamos realizar a análise de solo em um laboratório credenciado antes de iniciar a aplicação para obter a máxima eficiência.
+                Nós orientamos nossos clientes na interpretação das análises de solo para indicar a recomendação exata da Linha Lithosafra para sua cultura. Recomendamos realizar a análise de solo em um laboratório credenciado antes de iniciar a aplicação para obter a máxima eficiência.
               </AccordionContent>
             </AccordionItem>
           </Accordion>
@@ -883,8 +884,8 @@ Tipo de Cultura: ${formData.cultura}
               <h5 className="font-semibold mb-4">Produtos</h5>
               <ul className="space-y-2 text-sm text-primary-foreground/80">
                 <li>Litho C8420</li>
-                <li>LithoSafra Orgânico</li>
-                <li>LithoSafra Foliar</li>
+                <li>LTSafra Orgânico</li>
+                <li>Lithofort</li>
                 <li>Condicionadores de Solo</li>
               </ul>
             </div>
