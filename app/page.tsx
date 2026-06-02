@@ -5,8 +5,25 @@ import type React from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Leaf, Sprout, Shield, Phone, Mail, MapPin, Star, ChevronDown, ChevronUp } from "lucide-react"
+import { Leaf, Sprout, Shield, Phone, Mail, MapPin, Star, ChevronDown, ChevronUp, HelpCircle, CheckCircle2 } from "lucide-react"
 import { useState } from "react"
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
+
+const formatarTelefone = (valor: string) => {
+  const apenasDigitos = valor.replace(/\D/g, "")
+  const digitosLimitados = apenasDigitos.slice(0, 11)
+  
+  if (digitosLimitados.length <= 2) {
+    return digitosLimitados.length > 0 ? `(${digitosLimitados}` : ""
+  }
+  if (digitosLimitados.length <= 6) {
+    return `(${digitosLimitados.slice(0, 2)}) ${digitosLimitados.slice(2)}`
+  }
+  if (digitosLimitados.length <= 10) {
+    return `(${digitosLimitados.slice(0, 2)}) ${digitosLimitados.slice(2, 6)}-${digitosLimitados.slice(6)}`
+  }
+  return `(${digitosLimitados.slice(0, 2)}) ${digitosLimitados.slice(2, 7)}-${digitosLimitados.slice(7)}`
+}
 
 export default function AgroLandingPage() {
   const [formData, setFormData] = useState({
@@ -17,20 +34,55 @@ export default function AgroLandingPage() {
     unidade: "hectares", // Valor padrão
   })
 
+  const [errors, setErrors] = useState({
+    nome: "",
+    telefone: "",
+    cultura: "",
+    area: "",
+  })
+
+  const [isSubmitted, setIsSubmitted] = useState(false)
   const [expandedApplication, setExpandedApplication] = useState<number | null>(null)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target
+    let valorFormatado = value
+
+    if (name === "telefone") {
+      valorFormatado = formatarTelefone(value)
+    }
+
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: valorFormatado,
     }))
+    // Limpar o erro do campo alterado
+    if (errors[name as keyof typeof errors]) {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: "",
+      }))
+    }
   }
 
   const handleSolicitarOrcamento = () => {
-    // Validar se todos os campos estão preenchidos
-    if (!formData.nome || !formData.telefone || !formData.cultura || !formData.area) {
-      alert("Por favor, preencha todos os campos antes de solicitar o orçamento.")
+    const digitosTelefone = formData.telefone.replace(/\D/g, "")
+    // Validar os campos do formulário
+    const novosErros = {
+      nome: !formData.nome.trim() ? "Nome é obrigatório." : "",
+      telefone: !formData.telefone.trim() 
+        ? "Telefone é obrigatório." 
+        : (digitosTelefone.length < 10 
+          ? "Telefone incompleto. Digite o DDD + número." 
+          : ""),
+      cultura: !formData.cultura.trim() ? "Cultura é obrigatória." : "",
+      area: !formData.area.trim() ? "Área é obrigatória." : "",
+    }
+
+    setErrors(novosErros)
+
+    const temErros = Object.values(novosErros).some((erro) => erro !== "")
+    if (temErros) {
       return
     }
 
@@ -45,6 +97,7 @@ Tipo de Cultura: ${formData.cultura}
     const urlWhatsApp = `https://api.whatsapp.com/send/?phone=5579998278540&text=${mensagemCodificada}&type=phone_number&app_absent=0`
 
     window.open(urlWhatsApp, "_blank")
+    setIsSubmitted(true)
   }
 
   const toggleApplication = (index: number) => {
@@ -134,6 +187,9 @@ Tipo de Cultura: ${formData.cultura}
             </a>
             <a href="#sobre" className="hover:text-accent transition-colors">
               Sobre
+            </a>
+            <a href="#faq" className="hover:text-accent transition-colors">
+              FAQ
             </a>
             <a href="#contato" className="hover:text-accent transition-colors">
               Contato
@@ -235,8 +291,55 @@ Tipo de Cultura: ${formData.cultura}
         </div>
       </section>
 
+      {/* Applications Section */}
+      <section id="aplicacoes" className="py-16 px-6 bg-muted/50">
+        <div className="max-w-7xl mx-auto">
+          <h3 className="text-3xl font-bold text-center text-primary mb-12">Aplicações do LithoSafra</h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {applications.map((app, index) => (
+              <div key={index} className="space-y-4">
+                <Card
+                  className="cursor-pointer hover:shadow-lg transition-shadow"
+                  onClick={() => toggleApplication(index)}
+                >
+                  <CardHeader className="p-0">
+                    <img
+                      src={app.image || "/placeholder.svg"}
+                      alt={app.title}
+                      className="w-full h-48 object-cover rounded-t-lg"
+                    />
+                  </CardHeader>
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <CardTitle className="text-lg mb-2">{app.title}</CardTitle>
+                        <CardDescription>{app.description}</CardDescription>
+                      </div>
+                      {expandedApplication === index ? (
+                        <ChevronUp className="h-5 w-5 text-accent" />
+                      ) : (
+                        <ChevronDown className="h-5 w-5 text-accent" />
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Conteúdo expandido */}
+                {expandedApplication === index && (
+                  <Card className="border-accent/50 bg-accent/5">
+                    <CardContent className="p-4">
+                      <p className="text-muted-foreground text-sm leading-relaxed">{app.details}</p>
+                    </CardContent>
+                  </Card>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Products Section */}
-      <section id="produtos" className="py-16 px-6 bg-muted/50">
+      <section id="produtos" className="py-16 px-6">
         <div className="max-w-7xl mx-auto">
           <h3 className="text-3xl font-bold text-center text-primary mb-12">Linha LTSafra Premium</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -495,6 +598,62 @@ Tipo de Cultura: ${formData.cultura}
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <section id="faq" className="py-16 px-6 bg-muted/50">
+        <div className="max-w-4xl mx-auto">
+          <h3 className="text-3xl font-bold text-center text-primary mb-12 flex items-center justify-center gap-2">
+            <HelpCircle className="h-8 w-8 text-accent" />
+            Perguntas Frequentes
+          </h3>
+          <Accordion type="single" collapsible className="w-full bg-card p-6 rounded-lg shadow-sm border border-border">
+            <AccordionItem value="faq-1" className="border-b border-border py-2">
+              <AccordionTrigger className="text-base font-semibold text-primary hover:text-accent hover:no-underline transition-colors">
+                O que é o Lithothamnium e como ele beneficia as plantas?
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground text-sm mt-2 leading-relaxed">
+                O Lithothamnium é uma alga marinha calcária fossilizada, rica em cálcio, magnésio e mais de 70 micronutrientes orgânicos. Ela corrige a acidez do solo de forma muito mais rápida que o calcário comum, melhora a estrutura física do solo e aumenta a absorção de outros adubos pelas raízes das plantas.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="faq-2" className="border-b border-border py-2">
+              <AccordionTrigger className="text-base font-semibold text-primary hover:text-accent hover:no-underline transition-colors">
+                Qual a diferença entre a linha LTSafra e os adubos comuns do mercado?
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground text-sm mt-2 leading-relaxed">
+                Os adubos comuns fornecem apenas os macro nutrientes (NPK) sintéticos. A linha LTSafra combina a adubação NPK de alta performance com a biotecnologia do Lithothamnium. Isso garante nutrição imediata e de liberação gradual, além de condicionar o solo a longo prazo.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="faq-3" className="border-b border-border py-2">
+              <AccordionTrigger className="text-base font-semibold text-primary hover:text-accent hover:no-underline transition-colors">
+                Como é feita a entrega dos adubos em Sergipe?
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground text-sm mt-2 leading-relaxed">
+                Realizamos entregas programadas diretamente na sua propriedade em todo o estado de Sergipe. O frete e o prazo de entrega variam de acordo com a quantidade solicitada e a sua região. Entre em contato conosco para fazer uma cotação de frete.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="faq-4" className="border-b border-border py-2">
+              <AccordionTrigger className="text-base font-semibold text-primary hover:text-accent hover:no-underline transition-colors">
+                O LTSafra Orgânico possui certificação para uso em lavouras orgânicas?
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground text-sm mt-2 leading-relaxed">
+                Sim, o LTSafra Orgânico é composto por Lithothamnium puro e atende a todos os requisitos da legislação brasileira para insumos autorizados na agricultura orgânica, sendo amplamente utilizado por produtores certificados no estado.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="faq-5" className="border-b border-border py-2">
+              <AccordionTrigger className="text-base font-semibold text-primary hover:text-accent hover:no-underline transition-colors">
+                A Bioagro realiza análise de solo?
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground text-sm mt-2 leading-relaxed">
+                Nós orientamos nossos clientes na interpretação das análises de solo para indicar a recomendação exata da linha LTSafra para sua cultura. Recomendamos realizar a análise de solo em um laboratório credenciado antes de iniciar a aplicação para obter a máxima eficiência.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section id="contato" className="py-16 px-6">
         <div className="max-w-7xl mx-auto">
@@ -538,132 +697,175 @@ Tipo de Cultura: ${formData.cultura}
                 <p className="text-muted-foreground">Sábado: 7h às 12h</p>
               </div>
             </div>
-            <Card>
-              <CardHeader>
-                <CardTitle>Solicite um Orçamento</CardTitle>
-                <CardDescription>Preencha o formulário e receba uma proposta personalizada</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <label className="text-sm font-medium">Nome Completo *</label>
-                  <input
-                    type="text"
-                    name="nome"
-                    value={formData.nome}
-                    onChange={handleInputChange}
-                    className="w-full mt-1 px-3 py-2 border border-border rounded-md bg-input"
-                    placeholder="Seu nome"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="text-sm font-medium">Telefone *</label>
-                  <input
-                    type="tel"
-                    name="telefone"
-                    value={formData.telefone}
-                    onChange={handleInputChange}
-                    className="w-full mt-1 px-3 py-2 border border-border rounded-md bg-input"
-                    placeholder="(79) 9 9999-9999"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="text-sm font-medium">Tipo de Cultura *</label>
-                  <input
-                    type="text"
-                    name="cultura"
-                    value={formData.cultura}
-                    onChange={handleInputChange}
-                    className="w-full mt-1 px-3 py-2 border border-border rounded-md bg-input"
-                    placeholder="Ex: Milho, Soja, Hortaliças"
-                    required
-                  />
-                </div>
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <label className="text-sm font-medium">Área *</label>
-                    <input
-                      type="number"
-                      name="area"
-                      value={formData.area}
-                      onChange={handleInputChange}
-                      className="w-full mt-1 px-3 py-2 border border-border rounded-md bg-input"
-                      placeholder="0"
-                      min="0"
-                      step="0.1"
-                      required
-                    />
+            <Card className="overflow-hidden transition-all duration-300">
+              {isSubmitted ? (
+                <CardContent className="pt-8 pb-8 flex flex-col items-center text-center space-y-6">
+                  <div className="bg-emerald-100 dark:bg-emerald-950/50 p-4 rounded-full animate-bounce">
+                    <CheckCircle2 className="h-12 w-12 text-emerald-600 dark:text-emerald-400" />
                   </div>
-                  <div>
-                    <label className="text-sm font-medium">Unidade *</label>
-                    <select
-                      name="unidade"
-                      value={formData.unidade}
-                      onChange={handleInputChange}
-                      className="w-full mt-1 px-3 py-2 border border-border rounded-md bg-input"
-                      required
+                  <div className="space-y-2">
+                    <CardTitle className="text-2xl text-emerald-600 dark:text-emerald-400 font-bold">
+                      Orçamento Solicitado!
+                    </CardTitle>
+                    <p className="text-muted-foreground text-sm max-w-sm mx-auto">
+                      Olá, {formData.nome}! Abrimos o WhatsApp para você falar com um especialista. Se o chat não abriu, use o botão abaixo:
+                    </p>
+                  </div>
+                  <div className="bg-muted/50 p-4 rounded-lg text-left text-xs space-y-2 w-full max-w-sm border border-border">
+                    <div className="font-semibold text-muted-foreground">Resumo dos dados enviados:</div>
+                    <div className="grid grid-cols-2 gap-2 text-foreground">
+                      <div><strong>Cultura:</strong> {formData.cultura}</div>
+                      <div><strong>Área:</strong> {formData.area} {formData.unidade}</div>
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-2 w-full max-w-sm">
+                    <Button 
+                      className="bg-[#25D366] hover:bg-[#20ba5a] text-white w-full gap-2"
+                      onClick={() => {
+                        const mensagem = `Olá, gostaria de solicitar um orçamento:\nNome: ${formData.nome}\nTelefone: ${formData.telefone}\nTipo de Cultura: ${formData.cultura}\nÁrea: ${formData.area} ${formData.unidade}`;
+                        window.open(`https://api.whatsapp.com/send/?phone=5579998278540&text=${encodeURIComponent(mensagem)}&type=phone_number&app_absent=0`, "_blank");
+                      }}
                     >
-                      <option value="hectares">Hectares</option>
-                      <option value="tarefas">Tarefas</option>
-                    </select>
+                      <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.968C16.63 1.97 14.15 .942 11.52.942c-5.442 0-9.87 4.372-9.874 9.802-.001 1.77.463 3.5 1.34 5.016L1.87 20.4l4.777-1.246zM17.41 14.4c-.316-.16-1.872-.942-2.162-1.047-.29-.105-.502-.158-.713.158-.21.317-.814.158-.998.37-.184.21-.368.105-.684-.055-.316-.16-1.336-.5-2.544-1.597-.94-.855-1.573-1.91-1.757-2.227-.184-.316-.02-.487.138-.645.143-.14.316-.37.474-.553.158-.184.21-.316.316-.527.105-.21.053-.395-.026-.553-.08-.158-.713-1.758-.977-2.4-.257-.63-.518-.544-.713-.553-.184-.009-.395-.01-.605-.01-.21 0-.553.08-.842.4-.29.316-1.106 1.106-1.106 2.7 0 1.593 1.13 3.13 1.29 3.34.158.21 2.226 3.47 5.4 4.807.755.318 1.345.508 1.805.656.76.245 1.45.21 1.996.127.608-.093 1.873-.782 2.137-1.5.263-.717.263-1.33.184-1.46-.08-.13-.29-.21-.606-.37z"/>
+                      </svg>
+                      Reabrir no WhatsApp
+                    </Button>
+                    <Button 
+                      variant="outline"
+                      className="w-full"
+                      onClick={() => {
+                        setFormData({
+                          nome: "",
+                          telefone: "",
+                          cultura: "",
+                          area: "",
+                          unidade: "hectares",
+                        })
+                        setIsSubmitted(false)
+                      }}
+                    >
+                      Solicitar Outro Orçamento
+                    </Button>
                   </div>
-                </div>
-                <Button className="w-full bg-secondary hover:bg-secondary/90" onClick={handleSolicitarOrcamento}>
-                  Solicitar Orçamento
-                </Button>
-              </CardContent>
+                </CardContent>
+              ) : (
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault()
+                    handleSolicitarOrcamento()
+                  }}
+                >
+                  <CardHeader>
+                    <CardTitle>Solicite um Orçamento</CardTitle>
+                    <CardDescription>Preencha o formulário e receba uma proposta personalizada</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div>
+                      <label className="text-sm font-medium">Nome Completo *</label>
+                      <input
+                        type="text"
+                        name="nome"
+                        value={formData.nome}
+                        onChange={handleInputChange}
+                        className={`w-full mt-1 px-3 py-2 border rounded-md bg-input text-foreground transition-colors ${
+                          errors.nome ? "border-destructive focus-visible:ring-destructive focus:border-destructive" : "border-border"
+                        }`}
+                        placeholder="Seu nome"
+                        required
+                        onInvalid={(e) => (e.target as HTMLInputElement).setCustomValidity("Por favor, preencha o seu nome completo.")}
+                        onInput={(e) => (e.target as HTMLInputElement).setCustomValidity("")}
+                      />
+                      {errors.nome && (
+                        <p className="text-destructive text-xs mt-1 font-medium">{errors.nome}</p>
+                      )}
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium">Telefone *</label>
+                      <input
+                        type="tel"
+                        name="telefone"
+                        value={formData.telefone}
+                        onChange={handleInputChange}
+                        className={`w-full mt-1 px-3 py-2 border rounded-md bg-input text-foreground transition-colors ${
+                          errors.telefone ? "border-destructive focus-visible:ring-destructive focus:border-destructive" : "border-border"
+                        }`}
+                        placeholder="(79) 99999-9999"
+                        required
+                        onInvalid={(e) => (e.target as HTMLInputElement).setCustomValidity("Por favor, informe seu telefone com DDD.")}
+                        onInput={(e) => (e.target as HTMLInputElement).setCustomValidity("")}
+                      />
+                      {errors.telefone && (
+                        <p className="text-destructive text-xs mt-1 font-medium">{errors.telefone}</p>
+                      )}
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium">Tipo de Cultura *</label>
+                      <input
+                        type="text"
+                        name="cultura"
+                        value={formData.cultura}
+                        onChange={handleInputChange}
+                        className={`w-full mt-1 px-3 py-2 border rounded-md bg-input text-foreground transition-colors ${
+                          errors.cultura ? "border-destructive focus-visible:ring-destructive focus:border-destructive" : "border-border"
+                        }`}
+                        placeholder="Ex: Milho, Soja, Hortaliças"
+                        required
+                        onInvalid={(e) => (e.target as HTMLInputElement).setCustomValidity("Por favor, preencha o tipo de cultura.")}
+                        onInput={(e) => (e.target as HTMLInputElement).setCustomValidity("")}
+                      />
+                      {errors.cultura && (
+                        <p className="text-destructive text-xs mt-1 font-medium">{errors.cultura}</p>
+                      )}
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="text-sm font-medium">Área *</label>
+                        <input
+                          type="number"
+                          name="area"
+                          value={formData.area}
+                          onChange={handleInputChange}
+                          className={`w-full mt-1 px-3 py-2 border rounded-md bg-input text-foreground transition-colors ${
+                            errors.area ? "border-destructive focus-visible:ring-destructive focus:border-destructive" : "border-border"
+                          }`}
+                          placeholder="0"
+                          min="0"
+                          step="0.1"
+                          required
+                          onInvalid={(e) => (e.target as HTMLInputElement).setCustomValidity("Por favor, insira a área da lavoura.")}
+                          onInput={(e) => (e.target as HTMLInputElement).setCustomValidity("")}
+                        />
+                        {errors.area && (
+                          <p className="text-destructive text-xs mt-1 font-medium">{errors.area}</p>
+                        )}
+                      </div>
+                      <div>
+                        <label className="text-sm font-medium">Unidade *</label>
+                        <select
+                          name="unidade"
+                          value={formData.unidade}
+                          onChange={handleInputChange}
+                          className="w-full mt-1 px-3 py-2 border border-border rounded-md bg-input text-foreground"
+                          required
+                        >
+                          <option value="hectares">Hectares</option>
+                          <option value="tarefas">Tarefas</option>
+                        </select>
+                      </div>
+                    </div>
+                    <Button type="submit" className="w-full bg-secondary hover:bg-secondary/90 transition-all duration-300">
+                      Solicitar Orçamento
+                    </Button>
+                  </CardContent>
+                </form>
+              )}
             </Card>
           </div>
         </div>
       </section>
 
-      {/* Applications Section */}
-      <section id="aplicacoes" className="py-16 px-6 bg-muted/50">
-        <div className="max-w-7xl mx-auto">
-          <h3 className="text-3xl font-bold text-center text-primary mb-12">Aplicações do LithoSafra</h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {applications.map((app, index) => (
-              <div key={index} className="space-y-4">
-                <Card
-                  className="cursor-pointer hover:shadow-lg transition-shadow"
-                  onClick={() => toggleApplication(index)}
-                >
-                  <CardHeader className="p-0">
-                    <img
-                      src={app.image || "/placeholder.svg"}
-                      alt={app.title}
-                      className="w-full h-48 object-cover rounded-t-lg"
-                    />
-                  </CardHeader>
-                  <CardContent className="p-4">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <CardTitle className="text-lg mb-2">{app.title}</CardTitle>
-                        <CardDescription>{app.description}</CardDescription>
-                      </div>
-                      {expandedApplication === index ? (
-                        <ChevronUp className="h-5 w-5 text-accent" />
-                      ) : (
-                        <ChevronDown className="h-5 w-5 text-accent" />
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
 
-                {/* Conteúdo expandido */}
-                {expandedApplication === index && (
-                  <Card className="border-accent/50 bg-accent/5">
-                    <CardContent className="p-4">
-                      <p className="text-muted-foreground text-sm leading-relaxed">{app.details}</p>
-                    </CardContent>
-                  </Card>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Footer */}
       <footer className="bg-primary text-primary-foreground py-12 px-6">
@@ -710,6 +912,26 @@ Tipo de Cultura: ${formData.cultura}
           </div>
         </div>
       </footer>
+
+      {/* Floating WhatsApp Button */}
+      <a
+        href="https://api.whatsapp.com/send/?phone=5579998278540&text=Olá,%20gostaria%20de%20mais%20informações%20sobre%20as%20soluções%20da%20Bioagro.&type=phone_number&app_absent=0"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-3.5 rounded-full shadow-2xl hover:bg-[#20ba5a] transition-all duration-300 hover:scale-110 active:scale-95 flex items-center justify-center group"
+        aria-label="Falar no WhatsApp"
+      >
+        <svg
+          className="h-6 w-6 fill-current"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.968C16.63 1.97 14.15 .942 11.52.942c-5.442 0-9.87 4.372-9.874 9.802-.001 1.77.463 3.5 1.34 5.016L1.87 20.4l4.777-1.246zM17.41 14.4c-.316-.16-1.872-.942-2.162-1.047-.29-.105-.502-.158-.713.158-.21.317-.814.158-.998.37-.184.21-.368.105-.684-.055-.316-.16-1.336-.5-2.544-1.597-.94-.855-1.573-1.91-1.757-2.227-.184-.316-.02-.487.138-.645.143-.14.316-.37.474-.553.158-.184.21-.316.316-.527.105-.21.053-.395-.026-.553-.08-.158-.713-1.758-.977-2.4-.257-.63-.518-.544-.713-.553-.184-.009-.395-.01-.605-.01-.21 0-.553.08-.842.4-.29.316-1.106 1.106-1.106 2.7 0 1.593 1.13 3.13 1.29 3.34.158.21 2.226 3.47 5.4 4.807.755.318 1.345.508 1.805.656.76.245 1.45.21 1.996.127.608-.093 1.873-.782 2.137-1.5.263-.717.263-1.33.184-1.46-.08-.13-.29-.21-.606-.37z"/>
+        </svg>
+        <span className="max-w-0 overflow-hidden group-hover:max-w-xs group-hover:ml-2 transition-all duration-300 ease-in-out font-medium whitespace-nowrap text-sm text-white">
+          Falar no WhatsApp
+        </span>
+      </a>
     </div>
   )
 }

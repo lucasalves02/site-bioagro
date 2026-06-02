@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: "Bioagro Soluções Agropecuárias",
   description: "Fertilizantes enriquecidos com litotâmnio para agricultura sustentável em Sergipe",
   generator: "v0.app",
+  icons: {
+    icon: "/images/favicon-bioagro.png",
+  },
 }
 
 export default function RootLayout({
