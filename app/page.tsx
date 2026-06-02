@@ -12,7 +12,7 @@ import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/
 const formatarTelefone = (valor: string) => {
   const apenasDigitos = valor.replace(/\D/g, "")
   const digitosLimitados = apenasDigitos.slice(0, 11)
-  
+
   if (digitosLimitados.length <= 2) {
     return digitosLimitados.length > 0 ? `(${digitosLimitados}` : ""
   }
@@ -70,10 +70,10 @@ export default function AgroLandingPage() {
     // Validar os campos do formulário
     const novosErros = {
       nome: !formData.nome.trim() ? "Nome é obrigatório." : "",
-      telefone: !formData.telefone.trim() 
-        ? "Telefone é obrigatório." 
-        : (digitosTelefone.length < 10 
-          ? "Telefone incompleto. Digite o DDD + número." 
+      telefone: !formData.telefone.trim()
+        ? "Telefone é obrigatório."
+        : (digitosTelefone.length < 10
+          ? "Telefone incompleto. Digite o DDD + número."
           : ""),
       cultura: !formData.cultura.trim() ? "Cultura é obrigatória." : "",
       area: !formData.area.trim() ? "Área é obrigatória." : "",
@@ -110,35 +110,35 @@ Tipo de Cultura: ${formData.cultura}
       image: "/corn-field-agriculture.jpg",
       description: "Bioestimulação e aumento da resistência ao acamamento",
       details:
-        "A Linha Lithosafra atua como uma condicionadora bioclástica no cultivo do milho. A alta solubilidade do cálcio e magnésio marinho estimula a penetração radicular profunda e melhora a resistência estrutural do colmo, prevenindo o acamamento. Otimiza a absorção de nitrogênio e potássio para maximizar o rendimento de grãos por espiga. Aplicação recomendada: 200-300 kg/ha no plantio.",
+        "A Lithotamnium presente na Linha Lithosafra atua como um condicionador bioclástico no cultivo do milho. A alta solubilidade do cálcio e magnésio marinho estimula a penetração radicular profunda e melhora a resistência estrutural do colmo, prevenindo o acamamento. Otimiza a absorção de nitrogênio e potássio para maximizar o rendimento de grãos por espiga. Aplicação recomendada: 200-300 kg/ha no plantio.",
     },
     {
       title: "Horticultura",
       image: "/vegetable-garden-organic-farming.jpg",
       description: "Nutrição rizosférica imediata e aumento do shelf-life",
       details:
-        "Nas hortaliças, o Lithothamnium age diretamente na rizosfera para neutralizar a acidez imediata do solo. A liberação equilibrada de cálcio, magnésio e mais de 70 micronutrientes melhora a consistência celular das folhas e frutos, aumentando o teor de vitaminas e prolongando a vida útil pós-colheita (shelf-life). Recomendado: 150-300g/m² no preparo de canteiros.",
+        "Nas hortaliças, o Lithothamnium dos adubos da Linha Lithosafra age diretamente na rizosfera para neutralizar a acidez imediata do solo. A liberação equilibrada de cálcio, magnésio e mais de 70 micronutrientes melhora a consistência celular das folhas e frutos, aumentando o teor de vitaminas e prolongando a vida útil pós-colheita (shelf-life). Recomendado: 150-300g/m² no preparo de canteiros.",
     },
     {
       title: "Fruticultura",
       image: "/fruit-orchard-citrus-trees.jpg",
       description: "Elevação do brix e prevenção de aborto floral",
       details:
-        "Em pomares tropicais, a Linha Lithosafra promove o fornecimento balanceado de minerais complexados pela alga calcária. Melhora o vigor vegetativo, eleva a concentração de açúcares (grau Brix) e reduz drasticamente o abortamento de flores e frutíolos. Excelente para culturas exigentes como citros, caju, coco e manga.",
+        "Em pomares tropicais, a Linha Lithosafra promove o fornecimento balanceado de minerais presentes na alga lithothamnium sp.. Melhora o vigor vegetativo, eleva a concentração de açúcares (grau Brix) e reduz drasticamente o abortamento de flores e frutíolos. Excelente para culturas exigentes como citros, caju, coco e manga.",
     },
     {
       title: "Pastagens",
       image: "/green-pasture-cattle-grazing.jpg",
       description: "Recuperação de pastos e maior valor nutricional",
       details:
-        "A Linha Lithosafra neutraliza o alumínio tóxico em solos de pastagem e estimula a liberação de fósforo fixado. Isso aceleara o perfilhamento e a velocidade de rebrote do capim após o pastejo, elevando o teor de proteína bruta e minerais na forragem, o que otimiza o ganho de peso do rebanho.",
+        "A formulação exclusiva da Linha Lithosafra neutraliza o alumínio tóxico em solos de pastagem e estimula a liberação de fósforo fixado. Isso aceleara o perfilhamento e a velocidade de rebrote do capim após o pastejo, elevando o teor de proteína bruta e minerais na forragem, o que otimiza o ganho de peso do rebanho.",
     },
     {
       title: "Laranja",
       image: "/orange-grove-citrus-plantation.jpg",
       description: "Espessamento da casca e rendimento de suco nos citros",
       details:
-        "No cultivo de citros, o magnésio e cálcio bioclásticos ativam o metabolismo enzimático da planta. A Linha Lithosafra fortalece a casca dos frutos, reduzindo a incidência de podridão seca (estresse fisiológico) e aumentando a taxa de sólidos solúveis e rendimento de suco. Recomendado: 150-250 kg/ha na projeção da copa durante a floração.",
+        "No cultivo de citros, o magnésio e cálcio bioclásticos ativam o metabolismo enzimático da planta. A formulação exclusiva da Linha Lithosafra fornece nutrientes que fortalece a casca dos frutos, reduzindo a incidência de podridão seca (estresse fisiológico) e aumentando a taxa de sólidos solúveis e rendimento de suco. Recomendado: 150-250 kg/ha na projeção da copa durante a floração.",
     },
     {
       title: "Tomate",
@@ -159,14 +159,14 @@ Tipo de Cultura: ${formData.cultura}
       image: "/sugarcane-plantation-agriculture.jpg",
       description: "Aumento do ATR e maior longevidade das soqueiras",
       details:
-        "Na cana-de-açúcar, a Linha Lithosafra eleva o teor de sacarose (ATR) ao estimular a fotossíntese por meio do magnésio biodisponível. Garante brotações vigorosas na cana-planta e aumenta a longevidade das soqueiras nas colheitas sucessivas, otimizando a estrutura do solo nas entrelinhas. Ideal para aplicação no sulco de plantio.",
+        "Na cana-de-açúcar, o uso da Linha Lithosafra eleva o teor de sacarose (ATR) ao estimular a fotossíntese por meio do magnésio biodisponível. Garante brotações vigorosas na cana-planta e aumenta a longevidade das soqueiras nas colheitas sucessivas, otimizando a estrutura do solo nas entrelinhas. Ideal para aplicação no sulco de plantio.",
     },
     {
       title: "Mamão",
       image: "/papaya-plantation-tropical-fruit.jpg",
       description: "Prevenção de manchas fisiológicas e raízes mais ativas",
       details:
-        "No mamoeiro, o cálcio marinho do Lithothamnium evita o amolecimento precoce dos frutos e reduz manchas fisiológicas na casca. Estimula o crescimento contínuo de radículas absorventes, aumentando a eficiência no aproveitamento de água e de fertilizantes tradicionais (NPK). Recomendado: 100-200 kg/ha no plantio e frutificação.",
+        "No mamoeiro, o cálcio marinho do Lithothamnium presente na Linha Lithosafra evita o amolecimento precoce dos frutos e reduz manchas fisiológicas na casca. Estimula o crescimento contínuo de radículas absorventes, aumentando a eficiência no aproveitamento de água e de fertilizantes tradicionais (NPK). Recomendado: 100-200 kg/ha no plantio e frutificação.",
     },
   ]
 
@@ -720,7 +720,7 @@ Tipo de Cultura: ${formData.cultura}
                     </div>
                   </div>
                   <div className="flex flex-col gap-2 w-full max-w-sm">
-                    <Button 
+                    <Button
                       className="bg-[#25D366] hover:bg-[#20ba5a] text-white w-full gap-2"
                       onClick={() => {
                         const mensagem = `Olá, gostaria de solicitar um orçamento:\nNome: ${formData.nome}\nTelefone: ${formData.telefone}\nTipo de Cultura: ${formData.cultura}\nÁrea: ${formData.area} ${formData.unidade}`;
@@ -728,11 +728,11 @@ Tipo de Cultura: ${formData.cultura}
                       }}
                     >
                       <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.968C16.63 1.97 14.15 .942 11.52.942c-5.442 0-9.87 4.372-9.874 9.802-.001 1.77.463 3.5 1.34 5.016L1.87 20.4l4.777-1.246zM17.41 14.4c-.316-.16-1.872-.942-2.162-1.047-.29-.105-.502-.158-.713.158-.21.317-.814.158-.998.37-.184.21-.368.105-.684-.055-.316-.16-1.336-.5-2.544-1.597-.94-.855-1.573-1.91-1.757-2.227-.184-.316-.02-.487.138-.645.143-.14.316-.37.474-.553.158-.184.21-.316.316-.527.105-.21.053-.395-.026-.553-.08-.158-.713-1.758-.977-2.4-.257-.63-.518-.544-.713-.553-.184-.009-.395-.01-.605-.01-.21 0-.553.08-.842.4-.29.316-1.106 1.106-1.106 2.7 0 1.593 1.13 3.13 1.29 3.34.158.21 2.226 3.47 5.4 4.807.755.318 1.345.508 1.805.656.76.245 1.45.21 1.996.127.608-.093 1.873-.782 2.137-1.5.263-.717.263-1.33.184-1.46-.08-.13-.29-.21-.606-.37z"/>
+                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.968C16.63 1.97 14.15 .942 11.52.942c-5.442 0-9.87 4.372-9.874 9.802-.001 1.77.463 3.5 1.34 5.016L1.87 20.4l4.777-1.246zM17.41 14.4c-.316-.16-1.872-.942-2.162-1.047-.29-.105-.502-.158-.713.158-.21.317-.814.158-.998.37-.184.21-.368.105-.684-.055-.316-.16-1.336-.5-2.544-1.597-.94-.855-1.573-1.91-1.757-2.227-.184-.316-.02-.487.138-.645.143-.14.316-.37.474-.553.158-.184.21-.316.316-.527.105-.21.053-.395-.026-.553-.08-.158-.713-1.758-.977-2.4-.257-.63-.518-.544-.713-.553-.184-.009-.395-.01-.605-.01-.21 0-.553.08-.842.4-.29.316-1.106 1.106-1.106 2.7 0 1.593 1.13 3.13 1.29 3.34.158.21 2.226 3.47 5.4 4.807.755.318 1.345.508 1.805.656.76.245 1.45.21 1.996.127.608-.093 1.873-.782 2.137-1.5.263-.717.263-1.33.184-1.46-.08-.13-.29-.21-.606-.37z" />
                       </svg>
                       Reabrir no WhatsApp
                     </Button>
-                    <Button 
+                    <Button
                       variant="outline"
                       className="w-full"
                       onClick={() => {
@@ -769,9 +769,8 @@ Tipo de Cultura: ${formData.cultura}
                         name="nome"
                         value={formData.nome}
                         onChange={handleInputChange}
-                        className={`w-full mt-1 px-3 py-2 border rounded-md bg-input text-foreground transition-colors ${
-                          errors.nome ? "border-destructive focus-visible:ring-destructive focus:border-destructive" : "border-border"
-                        }`}
+                        className={`w-full mt-1 px-3 py-2 border rounded-md bg-input text-foreground transition-colors ${errors.nome ? "border-destructive focus-visible:ring-destructive focus:border-destructive" : "border-border"
+                          }`}
                         placeholder="Seu nome"
                         required
                         onInvalid={(e) => (e.target as HTMLInputElement).setCustomValidity("Por favor, preencha o seu nome completo.")}
@@ -788,9 +787,8 @@ Tipo de Cultura: ${formData.cultura}
                         name="telefone"
                         value={formData.telefone}
                         onChange={handleInputChange}
-                        className={`w-full mt-1 px-3 py-2 border rounded-md bg-input text-foreground transition-colors ${
-                          errors.telefone ? "border-destructive focus-visible:ring-destructive focus:border-destructive" : "border-border"
-                        }`}
+                        className={`w-full mt-1 px-3 py-2 border rounded-md bg-input text-foreground transition-colors ${errors.telefone ? "border-destructive focus-visible:ring-destructive focus:border-destructive" : "border-border"
+                          }`}
                         placeholder="(79) 99999-9999"
                         required
                         onInvalid={(e) => (e.target as HTMLInputElement).setCustomValidity("Por favor, informe seu telefone com DDD.")}
@@ -807,9 +805,8 @@ Tipo de Cultura: ${formData.cultura}
                         name="cultura"
                         value={formData.cultura}
                         onChange={handleInputChange}
-                        className={`w-full mt-1 px-3 py-2 border rounded-md bg-input text-foreground transition-colors ${
-                          errors.cultura ? "border-destructive focus-visible:ring-destructive focus:border-destructive" : "border-border"
-                        }`}
+                        className={`w-full mt-1 px-3 py-2 border rounded-md bg-input text-foreground transition-colors ${errors.cultura ? "border-destructive focus-visible:ring-destructive focus:border-destructive" : "border-border"
+                          }`}
                         placeholder="Ex: Milho, Soja, Hortaliças"
                         required
                         onInvalid={(e) => (e.target as HTMLInputElement).setCustomValidity("Por favor, preencha o tipo de cultura.")}
@@ -827,9 +824,8 @@ Tipo de Cultura: ${formData.cultura}
                           name="area"
                           value={formData.area}
                           onChange={handleInputChange}
-                          className={`w-full mt-1 px-3 py-2 border rounded-md bg-input text-foreground transition-colors ${
-                            errors.area ? "border-destructive focus-visible:ring-destructive focus:border-destructive" : "border-border"
-                          }`}
+                          className={`w-full mt-1 px-3 py-2 border rounded-md bg-input text-foreground transition-colors ${errors.area ? "border-destructive focus-visible:ring-destructive focus:border-destructive" : "border-border"
+                            }`}
                           placeholder="0"
                           min="0"
                           step="0.1"
@@ -927,7 +923,7 @@ Tipo de Cultura: ${formData.cultura}
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.968C16.63 1.97 14.15 .942 11.52.942c-5.442 0-9.87 4.372-9.874 9.802-.001 1.77.463 3.5 1.34 5.016L1.87 20.4l4.777-1.246zM17.41 14.4c-.316-.16-1.872-.942-2.162-1.047-.29-.105-.502-.158-.713.158-.21.317-.814.158-.998.37-.184.21-.368.105-.684-.055-.316-.16-1.336-.5-2.544-1.597-.94-.855-1.573-1.91-1.757-2.227-.184-.316-.02-.487.138-.645.143-.14.316-.37.474-.553.158-.184.21-.316.316-.527.105-.21.053-.395-.026-.553-.08-.158-.713-1.758-.977-2.4-.257-.63-.518-.544-.713-.553-.184-.009-.395-.01-.605-.01-.21 0-.553.08-.842.4-.29.316-1.106 1.106-1.106 2.7 0 1.593 1.13 3.13 1.29 3.34.158.21 2.226 3.47 5.4 4.807.755.318 1.345.508 1.805.656.76.245 1.45.21 1.996.127.608-.093 1.873-.782 2.137-1.5.263-.717.263-1.33.184-1.46-.08-.13-.29-.21-.606-.37z"/>
+          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.968C16.63 1.97 14.15 .942 11.52.942c-5.442 0-9.87 4.372-9.874 9.802-.001 1.77.463 3.5 1.34 5.016L1.87 20.4l4.777-1.246zM17.41 14.4c-.316-.16-1.872-.942-2.162-1.047-.29-.105-.502-.158-.713.158-.21.317-.814.158-.998.37-.184.21-.368.105-.684-.055-.316-.16-1.336-.5-2.544-1.597-.94-.855-1.573-1.91-1.757-2.227-.184-.316-.02-.487.138-.645.143-.14.316-.37.474-.553.158-.184.21-.316.316-.527.105-.21.053-.395-.026-.553-.08-.158-.713-1.758-.977-2.4-.257-.63-.518-.544-.713-.553-.184-.009-.395-.01-.605-.01-.21 0-.553.08-.842.4-.29.316-1.106 1.106-1.106 2.7 0 1.593 1.13 3.13 1.29 3.34.158.21 2.226 3.47 5.4 4.807.755.318 1.345.508 1.805.656.76.245 1.45.21 1.996.127.608-.093 1.873-.782 2.137-1.5.263-.717.263-1.33.184-1.46-.08-.13-.29-.21-.606-.37z" />
         </svg>
         <span className="max-w-0 overflow-hidden group-hover:max-w-xs group-hover:ml-2 transition-all duration-300 ease-in-out font-medium whitespace-nowrap text-sm text-white">
           Falar no WhatsApp
