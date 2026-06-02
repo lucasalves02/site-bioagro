@@ -1,0 +1,715 @@
+"use client"
+
+import type React from "react"
+
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Leaf, Sprout, Shield, Phone, Mail, MapPin, Star, ChevronDown, ChevronUp } from "lucide-react"
+import { useState } from "react"
+
+export default function AgroLandingPage() {
+  const [formData, setFormData] = useState({
+    nome: "",
+    telefone: "",
+    cultura: "",
+    area: "",
+    unidade: "hectares", // Valor padrão
+  })
+
+  const [expandedApplication, setExpandedApplication] = useState<number | null>(null)
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
+
+  const handleSolicitarOrcamento = () => {
+    // Validar se todos os campos estão preenchidos
+    if (!formData.nome || !formData.telefone || !formData.cultura || !formData.area) {
+      alert("Por favor, preencha todos os campos antes de solicitar o orçamento.")
+      return
+    }
+
+    // Criar mensagem para WhatsApp
+    const mensagem = `Olá, gostaria de solicitar um orçamento:
+Nome: ${formData.nome}
+Telefone: ${formData.telefone}
+Tipo de Cultura: ${formData.cultura}
+Área: ${formData.area} ${formData.unidade}`
+
+    const mensagemCodificada = encodeURIComponent(mensagem)
+    const urlWhatsApp = `https://api.whatsapp.com/send/?phone=5579998278540&text=${mensagemCodificada}&type=phone_number&app_absent=0`
+
+    window.open(urlWhatsApp, "_blank")
+  }
+
+  const toggleApplication = (index: number) => {
+    setExpandedApplication(expandedApplication === index ? null : index)
+  }
+
+  const applications = [
+    {
+      title: "Cultivo de Milho",
+      image: "/corn-field-agriculture.jpg",
+      description: "Aplicação especializada para maximizar a produção",
+      details:
+        "O LTSafra é ideal para o cultivo de milho, fornecendo os nutrientes essenciais durante todo o ciclo da cultura. Rico em cálcio e magnésio, promove o desenvolvimento radicular e aumenta a resistência ao acamamento. Aplicação recomendada: 200-300kg/ha no plantio.",
+    },
+    {
+      title: "Horticultura",
+      image: "/vegetable-garden-organic-farming.jpg",
+      description: "Soluções orgânicas para hortaliças e verduras",
+      details:
+        "Para cultivos de hortaliças, o LTSafra Orgânico oferece nutrição balanceada sem resíduos químicos. Melhora a qualidade dos frutos, aumenta o teor de vitaminas e prolonga a vida útil pós-colheita. Ideal para agricultura orgânica certificada. Aplicação recomendada: 150-300g/m² no preparo de canteiros",
+    },
+    {
+      title: "Fruticultura",
+      image: "/fruit-orchard-citrus-trees.jpg",
+      description: "Nutrição especializada para árvores frutíferas",
+      details:
+        "Em pomares e cultivos frutíferos, o LTSafra melhora a qualidade dos frutos, aumenta o brix e reduz a incidência de doenças fisiológicas. Especialmente eficaz em citros, manga, caju, entre outros.",
+    },
+    {
+      title: "Pastagens",
+      image: "/green-pasture-cattle-grazing.jpg",
+      description: "Recuperação e manutenção de pastagens",
+      details:
+        "Para pastagens degradadas, o LTSafra corrige a acidez do solo e fornece cálcio essencial para o crescimento das gramíneas. Melhora a palatabilidade e o valor nutricional do pasto, resultando em maior ganho de peso do gado.",
+    },
+    {
+      title: "Laranja",
+      image: "/orange-grove-citrus-plantation.jpg",
+      description: "Nutrição especializada para citros e laranjais",
+      details:
+        "No cultivo de laranja, o LTSafra fornece cálcio e magnésio essenciais para o desenvolvimento dos frutos cítricos. Melhora a espessura da casca, aumenta o teor de vitamina C e reduz a incidência de doenças fisiológicas como a podridão seca. Aplicação recomendada: 150-250kg/ha, especialmente durante a floração e formação dos frutos.",
+    },
+    {
+      title: "Tomate",
+      image: "/tomato.png",
+      description: "Nutrição especializada para cultivo de tomate",
+      details:
+        "No cultivo de tomate, o LTSafra fornece cálcio essencial para prevenir a podridão apical (fundo preto) e melhorar a firmeza dos frutos. O magnésio presente favorece a fotossíntese e o desenvolvimento das plantas. Aplicação recomendada: 150-200kg/ha no plantio e 100kg/ha em cobertura durante a floração.",
+    },
+    {
+      title: "Feijão",
+      image: "/bean-field-legume-cultivation.jpg",
+      description: "Nutrição balanceada para leguminosas",
+      details:
+        "Para o cultivo de feijão, o LithoSafra melhora a nodulação das raízes e a fixação biológica de nitrogênio. O cálcio presente fortalece a parede celular das vagens, reduzindo o chochamento dos grãos. Aplicação recomendada: 100-150kg/ha no plantio, especialmente em solos ácidos.",
+    },
+    {
+      title: "Cana-de-açúcar",
+      image: "/sugarcane-plantation-agriculture.jpg",
+      description: "Nutrição para canaviais de alta produtividade",
+      details:
+        "Em canaviais, o LithoSafra promove o perfilhamento e aumenta o teor de sacarose. O magnésio presente no produto é essencial para a fotossíntese, resultando em maior acúmulo de açúcares nos colmos. Ideal para plantio e soqueiras.",
+    },
+    {
+      title: "Mamão",
+      image: "/papaya-plantation-tropical-fruit.jpg",
+      description: "Nutrição especializada para cultivo de mamão",
+      details:
+        "No cultivo de mamão, o LithoSafra fornece cálcio essencial para prevenir a podridão apical e melhorar a qualidade dos frutos. O magnésio presente favorece a fotossíntese e o desenvolvimento das plantas. Aplicação recomendada: 100-200kg/ha, especialmente durante a formação dos frutos.",
+    },
+  ]
+
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <header className="bg-primary text-primary-foreground py-4 px-6">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <img src="/images/bioagro-logo.png" alt="Bioagro Soluções Agropecuárias" className="h-12 w-auto" />
+          </div>
+          <nav className="hidden md:flex items-center gap-6">
+            <a href="#produtos" className="hover:text-accent transition-colors">
+              Produtos
+            </a>
+            <a href="#aplicacoes" className="hover:text-accent transition-colors">
+              Aplicações
+            </a>
+            <a href="#sobre" className="hover:text-accent transition-colors">
+              Sobre
+            </a>
+            <a href="#contato" className="hover:text-accent transition-colors">
+              Contato
+            </a>
+            <a
+              href="https://webmail.migadu.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-accent transition-colors"
+            >
+              Webmail
+            </a>
+          </nav>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section
+        className="relative bg-gradient-to-r from-primary/10 to-accent/10 py-20 px-6"
+        style={{
+          backgroundImage: "url(/images/hero-background.png)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="max-w-7xl mx-auto text-center relative z-10">
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 text-balance drop-shadow-lg">
+            LTSafra - Adubo Premium com Lithothamnium
+          </h2>
+          <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto text-pretty drop-shadow-md">
+            Potencialize sua produção agrícola com o LTSafra, nosso fertilizante premium enriquecido com alga calcária.
+            Soluções sustentáveis da Bioagro para o agronegócio sergipano.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" className="bg-secondary hover:bg-secondary/90" asChild>
+              <a href="#aplicacoes">Ver Aplicações</a>
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-white text-white hover:bg-white hover:text-primary bg-transparent"
+              asChild
+            >
+              <a
+                href="https://api.whatsapp.com/send/?phone=5579998278540&text=Ol%C3%A1%2C+vim+atrav%C3%A9s+do+site+e+gostaria+de+mais+informa%C3%A7%C3%B5es.+Pode+me+ajudar%3F&type=phone_number&app_absent=0"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Falar com Especialista
+              </a>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="py-16 px-6">
+        <div className="max-w-7xl mx-auto">
+          <h3 className="text-3xl font-bold text-center text-primary mb-12">Por que escolher LithoSafra?</h3>
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="text-center">
+              <CardHeader>
+                <Sprout className="h-12 w-12 text-accent mx-auto mb-4" />
+                <CardTitle>Crescimento Acelerado</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">
+                  Rico em cálcio e magnésio, o LTSafra promove desenvolvimento radicular e foliar superior.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center">
+              <CardHeader>
+                <Shield className="h-12 w-12 text-accent mx-auto mb-4" />
+                <CardTitle>Proteção Natural</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">
+                  Fortalece a resistência das plantas contra pragas e doenças naturalmente com lithothamnium.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center">
+              <CardHeader>
+                <Leaf className="h-12 w-12 text-accent mx-auto mb-4" />
+                <CardTitle>100% Sustentável</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">
+                  Produto orgânico que melhora a qualidade do solo sem impactos ambientais negativos.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Products Section */}
+      <section id="produtos" className="py-16 px-6 bg-muted/50">
+        <div className="max-w-7xl mx-auto">
+          <h3 className="text-3xl font-bold text-center text-primary mb-12">Linha LTSafra Premium</h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <Card>
+              <CardHeader>
+                <Badge className="w-fit bg-accent">Mais Vendido</Badge>
+                <CardTitle>Litho C8420</CardTitle>
+                <CardDescription>Crescimento vigoroso e maior resistência</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2 text-sm text-muted-foreground mb-4">
+                  <li>• NPK 08-04-20 + Lithothamnium</li>
+                  <li>• Ideal para todas as culturas</li>
+                  <li>• Saco de 50kg</li>
+                </ul>
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl font-bold text-accent">A consultar</span>
+                  <Button size="sm" asChild>
+                    <a
+                      href="https://api.whatsapp.com/send/?phone=5579998278540&text=Ol%C3%A1%2C+estou+interessado+no+Litho+C8420&type=phone_number&app_absent=0"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Comprar
+                    </a>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <Badge className="w-fit bg-primary">Força no Plantio</Badge>
+                <CardTitle>Litho Horto</CardTitle>
+                <CardDescription>Ideal para enraizamento e florescimento</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2 text-sm text-muted-foreground mb-4">
+                  <li>• NPK 03-12-06 + Lithothamnium</li>
+                  <li>• O melhor para hortas</li>
+                  <li>• Saco de 50kg</li>
+                </ul>
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl font-bold text-accent">A consultar</span>
+                  <Button size="sm" variant="outline" asChild>
+                    <a
+                      href="https://api.whatsapp.com/send/?phone=5579998278540&text=Ol%C3%A1%2C+estou+interessado+no+Litho+Horto&type=phone_number&app_absent=0"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Comprar
+                    </a>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <Badge className="w-fit bg-primary">Jardim Exuberante</Badge>
+                <CardTitle>Litho Garden</CardTitle>
+                <CardDescription>Para folhagens e gramados com verde intenso</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2 text-sm text-muted-foreground mb-4">
+                  <li>• NPK 12-05-05 + Lithothamnium</li>
+                  <li>• Ideal para jardins, gramados e ornamentais</li>
+                  <li>• Saco de 50kg</li>
+                </ul>
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl font-bold text-accent">A consultar</span>
+                  <Button size="sm" variant="outline" asChild>
+                    <a
+                      href="https://api.whatsapp.com/send/?phone=5579998278540&text=Ol%C3%A1%2C+estou+interessado+no+Litho+Garden&type=phone_number&app_absent=0"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Comprar
+                    </a>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <Badge className="w-fit bg-primary">Alto Crescimento</Badge>
+                <CardTitle>Litho NK305</CardTitle>
+                <CardDescription>Máximo desenvolvimento vegetativo</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2 text-sm text-muted-foreground mb-4">
+                  <li>• NPK 30-00-05 + Lithothamnium</li>
+                  <li>• Aplicações de cobertura</li>
+                  <li>• Saco de 50kg</li>
+                </ul>
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl font-bold text-accent">A consultar</span>
+                  <Button size="sm" variant="outline" asChild>
+                    <a
+                      href="https://api.whatsapp.com/send/?phone=5579998278540&text=Ol%C3%A1%2C+estou+interessado+no+Litho+NK305&type=phone_number&app_absent=0"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Comprar
+                    </a>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <Badge className="w-fit bg-primary">Mais Versátil</Badge>
+                <CardTitle>LTSafra Orgânico</CardTitle>
+                <CardDescription>100% natural para agricultura orgânica</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2 text-sm text-muted-foreground mb-4">
+                  <li>• Lithothamnium puro</li>
+                  <li>• Certificado orgânico</li>
+                  <li>• Saco de 25kg</li>
+                </ul>
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl font-bold text-accent">A consultar</span>
+                  <Button size="sm" variant="outline" asChild>
+                    <a
+                      href="https://api.whatsapp.com/send/?phone=5579998278540&text=Ol%C3%A1%2C+estou+interessado+no+LithoSafra+Org%C3%A2nico&type=phone_number&app_absent=0"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Comprar
+                    </a>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <Badge className="w-fit bg-primary">Nutrição de Elite</Badge>
+                <CardTitle>LTSafra Foliar</CardTitle>
+                <CardDescription>Aplicação foliar de alta absorção</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2 text-sm text-muted-foreground mb-4">
+                  <li>• Pó micronizado para Dispersão</li>
+                  <li>• Rápida Absorção</li>
+                  <li>• Saco de 1 KG</li>
+                </ul>
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl font-bold text-accent">A consultar</span>
+                  <Button size="sm" variant="outline" asChild>
+                    <a
+                      href="https://api.whatsapp.com/send/?phone=5579998278540&text=Ol%C3%A1%2C+estou+interessado+no+LithoSafra+Foliar&type=phone_number&app_absent=0"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Comprar
+                    </a>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-16 px-6 bg-muted/50">
+        <div className="max-w-7xl mx-auto">
+          <h3 className="text-3xl font-bold text-center text-primary mb-12">O que dizem nossos clientes</h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <Card>
+              <CardContent className="pt-6">
+                <div className="flex mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-accent text-accent" />
+                  ))}
+                </div>
+                <p className="text-muted-foreground mb-4">
+                  "Desde que comecei a usar o LithoSafra, minha produção de milho aumentou. A Bioagro tem produtos de
+                  qualidade excepcional!"
+                </p>
+                <div className="font-semibold">João Silva</div>
+                <div className="text-sm text-muted-foreground">Produtor Rural - Itabaiana/SE</div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="pt-6">
+                <div className="flex mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-accent text-accent" />
+                  ))}
+                </div>
+                <p className="text-muted-foreground mb-4">
+                  "O LithoSafra é incrível! Minhas plantas ficaram mais resistentes, os frutos ficaram maiores e a
+                  colheita foi excepcional. Recomendo a Bioagro."
+                </p>
+                <div className="font-semibold">Maria Santos</div>
+                <div className="text-sm text-muted-foreground">Agricultora - Lagarto/SE</div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="pt-6">
+                <div className="flex mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-accent text-accent" />
+                  ))}
+                </div>
+                <p className="text-muted-foreground mb-4">
+                  "Atendimento excelente da Bioagro e produtos que realmente fazem a diferença. Parceria de confiança há
+                  3 anos."
+                </p>
+                <div className="font-semibold">Carlos Oliveira</div>
+                <div className="text-sm text-muted-foreground">Fazenda São José - Tobias Barreto/SE</div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="sobre" className="py-16 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h3 className="text-3xl font-bold text-primary mb-6">Bioagro - Especialistas em Nutrição Vegetal</h3>
+              <p className="text-muted-foreground mb-6 text-pretty">
+                Com mais de 30 anos de experiência no mercado agropecuário sergipano, a Bioagro é pioneira na
+                comercialização de fertilizantes enriquecidos com lithothamnium na região, oferecendo soluções
+                sustentáveis e eficazes.
+              </p>
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <Shield className="h-6 w-6 text-accent" />
+                  <span>Produtos registrados no MAPA</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Leaf className="h-6 w-6 text-accent" />
+                  <span>Compromisso com sustentabilidade</span>
+                </div>
+              </div>
+            </div>
+            <div className="bg-gradient-to-br from-accent/20 to-primary/20 rounded-lg p-8 text-center">
+              <div className="text-4xl font-bold text-primary mb-2">500+</div>
+              <div className="text-muted-foreground mb-4">Produtores atendidos</div>
+              <div className="text-4xl font-bold text-primary mb-2">30</div>
+              <div className="text-muted-foreground mb-4">Anos de experiência</div>
+              <div className="text-4xl font-bold text-primary mb-2">100%</div>
+              <div className="text-muted-foreground">Satisfação dos clientes</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contato" className="py-16 px-6">
+        <div className="max-w-7xl mx-auto">
+          <h3 className="text-3xl font-bold text-center text-primary mb-12">Entre em Contato</h3>
+          <div className="grid lg:grid-cols-2 gap-12">
+            <div>
+              <h4 className="text-xl font-semibold mb-6">Fale com nossos especialistas</h4>
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <Phone className="h-5 w-5 text-accent" />
+                  <span>(79) 3241-7850</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Mail className="h-5 w-5 text-accent" />
+                  <a href="mailto:contato@bioagro.se" className="hover:text-accent transition-colors">
+                    contato@bioagro.se
+                  </a>
+                </div>
+                <div className="flex items-start gap-3">
+                  <MapPin className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
+                  <div className="flex-1">
+                    <span>Av. Chanceler Osvaldo Aranha, 746 - José Conrado de Araújo, Aracaju - SE, 49085-100</span>
+                    <div className="mt-4">
+                      <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.2847234567!2d-37.0731234!3d-10.9472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x71ab3f8e9e9e9e9%3A0x1234567890abcdef!2sAv.%20Chanceler%20Osvaldo%20Aranha%2C%20746%20-%20Jos%C3%A9%20Conrado%20de%20Ara%C3%BAjo%2C%20Aracaju%20-%20SE%2C%2049085-100!5e0!3m2!1spt-BR!2sbr!4v1234567890123!5m2!1spt-BR!2sbr"
+                        width="100%"
+                        height="200"
+                        style={{ border: 0 }}
+                        allowFullScreen
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        className="rounded-lg shadow-md"
+                      ></iframe>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-8">
+                <h5 className="font-semibold mb-4">Horário de Funcionamento</h5>
+                <p className="text-muted-foreground">Segunda a Sexta: 7h às 17h</p>
+                <p className="text-muted-foreground">Sábado: 7h às 12h</p>
+              </div>
+            </div>
+            <Card>
+              <CardHeader>
+                <CardTitle>Solicite um Orçamento</CardTitle>
+                <CardDescription>Preencha o formulário e receba uma proposta personalizada</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <label className="text-sm font-medium">Nome Completo *</label>
+                  <input
+                    type="text"
+                    name="nome"
+                    value={formData.nome}
+                    onChange={handleInputChange}
+                    className="w-full mt-1 px-3 py-2 border border-border rounded-md bg-input"
+                    placeholder="Seu nome"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-medium">Telefone *</label>
+                  <input
+                    type="tel"
+                    name="telefone"
+                    value={formData.telefone}
+                    onChange={handleInputChange}
+                    className="w-full mt-1 px-3 py-2 border border-border rounded-md bg-input"
+                    placeholder="(79) 9 9999-9999"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-medium">Tipo de Cultura *</label>
+                  <input
+                    type="text"
+                    name="cultura"
+                    value={formData.cultura}
+                    onChange={handleInputChange}
+                    className="w-full mt-1 px-3 py-2 border border-border rounded-md bg-input"
+                    placeholder="Ex: Milho, Soja, Hortaliças"
+                    required
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-sm font-medium">Área *</label>
+                    <input
+                      type="number"
+                      name="area"
+                      value={formData.area}
+                      onChange={handleInputChange}
+                      className="w-full mt-1 px-3 py-2 border border-border rounded-md bg-input"
+                      placeholder="0"
+                      min="0"
+                      step="0.1"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium">Unidade *</label>
+                    <select
+                      name="unidade"
+                      value={formData.unidade}
+                      onChange={handleInputChange}
+                      className="w-full mt-1 px-3 py-2 border border-border rounded-md bg-input"
+                      required
+                    >
+                      <option value="hectares">Hectares</option>
+                      <option value="tarefas">Tarefas</option>
+                    </select>
+                  </div>
+                </div>
+                <Button className="w-full bg-secondary hover:bg-secondary/90" onClick={handleSolicitarOrcamento}>
+                  Solicitar Orçamento
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Applications Section */}
+      <section id="aplicacoes" className="py-16 px-6 bg-muted/50">
+        <div className="max-w-7xl mx-auto">
+          <h3 className="text-3xl font-bold text-center text-primary mb-12">Aplicações do LithoSafra</h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {applications.map((app, index) => (
+              <div key={index} className="space-y-4">
+                <Card
+                  className="cursor-pointer hover:shadow-lg transition-shadow"
+                  onClick={() => toggleApplication(index)}
+                >
+                  <CardHeader className="p-0">
+                    <img
+                      src={app.image || "/placeholder.svg"}
+                      alt={app.title}
+                      className="w-full h-48 object-cover rounded-t-lg"
+                    />
+                  </CardHeader>
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <CardTitle className="text-lg mb-2">{app.title}</CardTitle>
+                        <CardDescription>{app.description}</CardDescription>
+                      </div>
+                      {expandedApplication === index ? (
+                        <ChevronUp className="h-5 w-5 text-accent" />
+                      ) : (
+                        <ChevronDown className="h-5 w-5 text-accent" />
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Conteúdo expandido */}
+                {expandedApplication === index && (
+                  <Card className="border-accent/50 bg-accent/5">
+                    <CardContent className="p-4">
+                      <p className="text-muted-foreground text-sm leading-relaxed">{app.details}</p>
+                    </CardContent>
+                  </Card>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-primary text-primary-foreground py-12 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <div className="mb-4">
+                <img src="/images/bioagro-logo.png" alt="Bioagro Soluções Agropecuárias" className="h-10 w-auto" />
+              </div>
+              <p className="text-primary-foreground/80 text-sm">
+                Sua parceira no crescimento sustentável da agricultura sergipana.
+              </p>
+            </div>
+            <div>
+              <h5 className="font-semibold mb-4">Produtos</h5>
+              <ul className="space-y-2 text-sm text-primary-foreground/80">
+                <li>Litho C8420</li>
+                <li>LithoSafra Orgânico</li>
+                <li>LithoSafra Foliar</li>
+                <li>Condicionadores de Solo</li>
+              </ul>
+            </div>
+            <div>
+              <h5 className="font-semibold mb-4">Empresa</h5>
+              <ul className="space-y-2 text-sm text-primary-foreground/80">
+                <li>Sobre Nós</li>
+                <li>Certificações</li>
+                <li>Sustentabilidade</li>
+                <li>Carreiras</li>
+              </ul>
+            </div>
+            <div>
+              <h5 className="font-semibold mb-4">Suporte</h5>
+              <ul className="space-y-2 text-sm text-primary-foreground/80">
+                <li>Assistência Técnica</li>
+                <li>Análise de Solo</li>
+                <li>Treinamentos</li>
+                <li>FAQ</li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center text-sm text-primary-foreground/80">
+            <p>&copy; 2024 Bioagro Soluções Agropecuárias. Todos os direitos reservados.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  )
+}
